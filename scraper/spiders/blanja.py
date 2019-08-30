@@ -5,10 +5,10 @@ from scraper.items import ImageItem
 
 class BlanjaSpider(scrapy.Spider):
     name = "blanjaspider"
-    PAGE_LIMIT = 5
+    PAGE_LIMIT = 3
     OUTPUT_PATH = "outputs/blanja/"
     list_urls = [
-        "https://www.blanja.com/store/unileverofficialstore",
+        "https://www.blanja.com/store/unileverofficialstore?keyword=&order=orders_desc",
         "https://www.blanja.com/store/miyakoofficialstore?keyword=&order=orders_desc",
     ]
 
@@ -42,3 +42,13 @@ class BlanjaSpider(scrapy.Spider):
                 "url_image": "https:" + box_item.css(IMAGE_URL_SELECTOR).extract_first(),
                 "image_urls": ["https:" + box_item.css(IMAGE_URL_SELECTOR).extract_first()],
             }
+
+        NEXT_PAGE_SELECTOR = "a.btn.next::attr(href)"
+        next_page_url = response.css(NEXT_PAGE_SELECTOR).extract_first()
+        next_page = int(next_page_url.split("pageNo=")[1][:1])
+
+        if next_page <= self.PAGE_LIMIT:
+            yield scrapy.Request(
+                response.urljoin(next_page_url),
+                callback=self.parse
+            )
