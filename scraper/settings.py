@@ -69,7 +69,8 @@ ITEM_PIPELINES = {
     #'scrapy.pipelines.images.ImagesPipeline': 1,
     'scraper.pipelines.ScraperImagePipeline': 1,
 }
-IMAGES_STORE = 'outputs/blanja/'
+#IMAGES_STORE = 'outputs/blanja/'
+IMAGES_STORE = 'outputs/idmarco/'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
