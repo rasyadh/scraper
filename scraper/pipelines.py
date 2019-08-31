@@ -24,4 +24,4 @@ class ScraperImagePipeline(ImagesPipeline):
 
     def file_path(self, request, response=None, info=None):
         filename = request.meta.get("store") + "_" + request.meta.get("name") + '_' + request.meta.get("price")
-        return "full/%s.jpg" % filename
+        return "full/{}/{}.jpg".format(request.meta.get("store"), filename)
