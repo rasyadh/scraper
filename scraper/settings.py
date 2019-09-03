@@ -46,15 +46,19 @@ TELNETCONSOLE_ENABLED = False
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'scrapblibli.middlewares.ScrapblibliSpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+   # 'scrapblibli.middlewares.ScrapblibliSpiderMiddleware': 543,
+   'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'scraper.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   # 'scraper.middlewares.MyCustomDownloaderMiddleware': 543,
+   'scrapy_splash.SplashCookiesMiddleware': 723,
+   'scrapy_splash.SplashMiddleware': 725,
+   'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -71,7 +75,8 @@ ITEM_PIPELINES = {
 }
 # IMAGES_STORE = 'outputs/blanja/'
 # IMAGES_STORE = 'outputs/idmarco/'
-IMAGES_STORE = 'outputs/indomaret/'
+# IMAGES_STORE = 'outputs/indomaret/'
+IMAGES_STORE = 'outputs/blibli/'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -99,3 +104,7 @@ REDIRECT_ENABLED = False
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+SPLASH_URL = 'http://0.0.0.0:8050'
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
