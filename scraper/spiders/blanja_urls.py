@@ -40,3 +40,24 @@ unilevercategory_list = [
     "https://www.blanja.com/store/unileverofficialstore/groceries/blueband?keyword=&order=orders_desc",
     "https://www.blanja.com/store/unileverofficialstore/groceries/molto?keyword=&order=orders_desc",
 ]
+
+new_list = [
+    "https://www.blanja.com/store/makarizoofficial?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/pigeonindonesia?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/heavenlyblush?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/colgatepalmoliveofficial?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/kimberlyclarkindonesia?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/fibercreme?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/sevenbika?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/kimiafarma?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/primafreshmart?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/philipslighting?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/scjohnsonsonid?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/galeniumofficialstore/baby/caladine-powder?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/kelloggsofficial/kellogg's?keyword=&order=orders_desc",
+    "https://www.blanja.com/store/kelloggsofficial/pringles?keyword=&order=orders_desc",
+]
+
+new2_list = [
+    "https://item.blanja.com/items/shopSearch?shopId=130269&shopKeyWords=buavita&order=orders_desc&navKey=&naValue=",
+]

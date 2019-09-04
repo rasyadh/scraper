@@ -20,7 +20,7 @@ class ScraperImagePipeline(ImagesPipeline):
             "name": item["name"], 
             "price": item["price"],
         }
-        yield scrapy.Request(url=img_url, meta=meta)
+        yield scrapy.Request(url=img_url, meta=meta, dont_filter=True)
 
     def file_path(self, request, response=None, info=None):
         filename = request.meta.get("store") + "_" + request.meta.get("name") + '_' + request.meta.get("price")

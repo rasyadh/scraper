@@ -16,9 +16,11 @@ class IndomaretSpider(scrapy.Spider):
     def start_requests(self):
         self.logger.info("current working directory is : %s" % os.getcwd())
         
-        urls = indomaret_urls.brands_11_urls
+        # urls = indomaret_urls.brands_11_urls
+        urls = indomaret_urls.brands_urls
         for url in urls:
-            request = scrapy.Request(url=url+"?sortcol=populer", callback=self.parse)
+            # request = scrapy.Request(url=url+"?sortcol=populer", callback=self.parse)
+            request = scrapy.Request(url=url, callback=self.parse)
             yield request
 
     def get_brands_links(self, response):

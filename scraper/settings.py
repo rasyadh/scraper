@@ -47,17 +47,17 @@ TELNETCONSOLE_ENABLED = False
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-   # 'scrapblibli.middlewares.ScrapblibliSpiderMiddleware': 543,
-   'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+   # 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    # 'scraper.middlewares.MyCustomDownloaderMiddleware': 543,
-   'scrapy_splash.SplashCookiesMiddleware': 723,
-   'scrapy_splash.SplashMiddleware': 725,
-   'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+   # 'scrapy_splash.SplashCookiesMiddleware': 723,
+   # 'scrapy_splash.SplashMiddleware': 725,
+   # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+   # 'scrapy.downloadermiddlewares.stats.DownloaderStats': 850,
 }
 
 # Enable or disable extensions
@@ -82,7 +82,7 @@ IMAGES_STORE = 'outputs/blibli/'
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-AUTOTHROTTLE_START_DELAY = 5
+AUTOTHROTTLE_START_DELAY = 30
 # The maximum download delay to be set in case of high latencies
 AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
@@ -105,6 +105,6 @@ REDIRECT_ENABLED = False
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-SPLASH_URL = 'http://0.0.0.0:8050'
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
-HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+# SPLASH_URL = 'http://0.0.0.0:8050'
+# DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+# HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'

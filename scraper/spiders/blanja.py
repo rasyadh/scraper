@@ -2,63 +2,20 @@ import os
 import re
 import scrapy
 from scraper.items import ImageItem
+from scraper.spiders import blanja_urls
 
 class BlanjaSpider(scrapy.Spider):
     name = "blanjaspider"
     PAGE_LIMIT = 3
     OUTPUT_PATH = "outputs/blanja/"
 
-    officialstores_urls = [
-        "https://www.blanja.com/store/perumbulogofficial?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/khongguanbiscuitsshop?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/otstoreofficial?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/kinoindonesia?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/pngofficialstore?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore?keyword=&order=orders_desc",
-    ]
-
-    pngstorecategory_list = [
-        "https://www.blanja.com/store/pngofficialstore/pantene?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/pngofficialstore/rejoice?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/pngofficialstore/head-&-shoulder?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/pngofficialstore/gillette?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/pngofficialstore/herbal-essences?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/pngofficialstore/olay?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/pngofficialstore/oral-b-?keyword=&order=orders_desc",
-    ]
-
-    unilevercategory_list = [
-        "https://www.blanja.com/store/unileverofficialstore/body-care/dove?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/body-care/lifebuoy?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/body-care/vaseline?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/body-care/lux?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/skin-care/pond's?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/skin-care/dove?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/skin-care/vaseline?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/skin-care/citra?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/hair-care/lifebuoy?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/hair-care/tresemme?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/hair-care/clear?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/hair-care/sunsilk?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/deodorant/axe?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/deodorant/rexona?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/toothpaste/close-up?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/toothpaste/pepsodent?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/baby-care/zwitsal?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/groceries/bango?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/groceries/sariwangi?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/groceries/blueband?keyword=&order=orders_desc",
-        "https://www.blanja.com/store/unileverofficialstore/groceries/molto?keyword=&order=orders_desc",
-    ]
-
     def start_requests(self):
         self.logger.info("current working directory is : %s" % os.getcwd())
         
-        urls = self.unilevercategory_list
+        urls = blanja_urls.new2_list
         for url in urls:
             request = scrapy.Request(url=url, callback=self.parse)
             yield request
-
 
     def parse(self, response):
         # Global Brand
@@ -66,7 +23,9 @@ class BlanjaSpider(scrapy.Spider):
         # store = response.css(STORE_SELECTOR).extract_first()
 
         # Category Brand
-        store = response.url.split("?")[0].split("/")[-1]
+        # store = response.url.split("?")[0].split("/")[-1]
+        # Category Brand Search
+        store = response.url.split("shopKeyWords=")[1].split("&")[0]
         store = re.sub("[^\w]", " ", store).strip().upper()
 
         RESULT_SELECTOR = ".result-thumbs"
@@ -83,7 +42,10 @@ class BlanjaSpider(scrapy.Spider):
             image = box_item.css(IMAGE_URL_SELECTOR).extract_first()
             image_url = ""
             if "blanja" in image:
-                image_url = image[:len(image) - 3] + "720"
+                if image.endswith('.jpg'):
+                    image_url = image
+                else:
+                    image_url = image[:len(image) - 3] + "720"
                 if "https://" not in image_url:
                     image_url = "https://" + image_url
                 elif "https:" not in image_url:
