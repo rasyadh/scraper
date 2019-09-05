@@ -2,7 +2,6 @@ brands_url = [
     "https://www.blibli.com/brand/sedaap?page=1&start=0&intent=false&brandName=sedaap&sort=7",
     "https://www.blibli.com/brand/teh-pucuk?page=1&start=0&intent=false&brandName=teh-pucuk&sort=7",
     "https://www.blibli.com/brand/indomie-official-store?page=1&start=0&intent=true&brandName=indomie-official-store&sort=7",
-    "https://www.blibli.com/brand/indomie-official-store?page=1&start=0&intent=false&brandName=indomie-official-store&sort=7",
     "https://www.blibli.com/brand/bear-brand?page=1&start=0&intent=true&brandName=bear-brand&sort=7",
     "https://www.blibli.com/brand/bango?page=1&start=0&intent=true&brandName=bango&sort=7",
     "https://www.blibli.com/brand/sunlight?page=1&start=0&intent=true&brandName=sunlight&sort=7",

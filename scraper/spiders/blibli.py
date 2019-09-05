@@ -33,14 +33,14 @@ class BlibliSpider(scrapy.Spider):
     def start_requests(self):
         self.logger.info("current working directory is : %s" % os.getcwd())
         
-        urls = blibli_urls.brands_url
+        urls = blibli_urls.brands_url[50:]
         for url in urls:
             request = scrapy.Request(url=url, callback=self.parse)
             yield request
 
     def parse(self, response):
         self.driver.get(response.url)
-        wait = WebDriverWait(self.driver, 30)
+        wait = WebDriverWait(self.driver, 20)
         products = wait.until(ec.presence_of_all_elements_located((By.CLASS_NAME, 'product__card')))
 
         store = response.url.split('?')[0].split('/')[-1]
