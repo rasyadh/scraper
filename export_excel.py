@@ -37,8 +37,32 @@ def main(export_name, source, image_dimension):
                     
     workbook.close()
 
+def main_without_image(export_name, source):
+    workbook = xlsxwriter.Workbook(export_name)
+
+    for (dirpath, dirnames, filenames) in walk(source):
+        for subdirname in dirnames:
+            worksheet = workbook.add_worksheet(name=subdirname)
+            worksheet.set_column('A:A', 50)
+            worksheet.set_column('B:B', 100)
+            worksheet.set_column('C:C', 30)
+            worksheet.write('A1', 'Brand')
+            worksheet.write('B1', 'Name')
+            worksheet.write('C1', 'Price')
+            
+            for (subdirpath, subdirnames, subfilenames) in walk(join(source, subdirname)):
+                for index, filename in enumerate(subfilenames):
+                    arr_name = filename.split('.jpg')[0].split('_')
+
+                    worksheet.write('A{}'.format(index + 2), arr_name[0])
+                    worksheet.write('B{}'.format(index + 2), arr_name[1])
+                    worksheet.write('C{}'.format(index + 2), arr_name[2])
+                    
+    workbook.close()
+
 if __name__ == '__main__':
-    SOURCE_PATH = 'outputs/blanja/full'
-    EXPORT_NAME = 'excel/blanja.xlsx'
+    SOURCE_PATH = 'outputs/blibli/full'
+    EXPORT_NAME = 'excel/blibli.xlsx'
     IMAGE_DIMENSION = 500.0
     main(EXPORT_NAME, SOURCE_PATH, IMAGE_DIMENSION)
+    main_without_image(EXPORT_NAME, SOURCE_PATH)
